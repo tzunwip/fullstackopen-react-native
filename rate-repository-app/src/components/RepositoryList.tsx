@@ -16,6 +16,7 @@ export interface Repository {
 const styles = StyleSheet.create({
   separator: {
     height: 10,
+    backgroundColor: "lightgrey",
   },
 });
 
