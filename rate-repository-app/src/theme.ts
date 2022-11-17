@@ -6,6 +6,7 @@ const theme = {
     viewSecondaryText: "#FFFFFF",
     textPrimary: "#000000",
     textSecondary: "#586069",
+    error: "#d73a4a",
   },
   fontSizes: {
     body: 14,
