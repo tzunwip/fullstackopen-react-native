@@ -1,10 +1,4 @@
-import {
-  Text,
-  Pressable,
-  View,
-  GestureResponderEvent,
-  StyleSheet,
-} from "react-native";
+import { Text, Pressable, View, StyleSheet } from "react-native";
 import { Formik, FormikHelpers, FormikProps } from "formik";
 import FormikTextInput from "./FormikTextInput";
 import theme from "../theme";
@@ -15,9 +9,6 @@ const initialValues = {
 };
 
 export type Values = typeof initialValues;
-type RNFormikProps<T> = {
-  handleSubmit: (event: GestureResponderEvent) => void;
-} & FormikProps<T>;
 
 const styles = StyleSheet.create({
   form: {
@@ -61,7 +52,7 @@ function SignIn() {
 
   return (
     <Formik initialValues={initialValues} onSubmit={submitFormik}>
-      {({ handleSubmit }: RNFormikProps<Values>) => (
+      {({ handleSubmit }: FormikProps<Values>) => (
         <View style={styles.form}>
           <FormikTextInput
             style={styles.textInput}
@@ -74,7 +65,7 @@ function SignIn() {
             placeholder="Password"
             secureTextEntry
           />
-          <Pressable style={styles.submitButton} onPress={handleSubmit}>
+          <Pressable style={styles.submitButton} onPress={() => handleSubmit()}>
             <Text style={styles.submitText}>Sign In</Text>
           </Pressable>
         </View>
