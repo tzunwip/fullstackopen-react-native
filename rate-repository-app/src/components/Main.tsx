@@ -1,12 +1,14 @@
 import Constants from "expo-constants";
 import { StyleSheet, View } from "react-native";
 import { Routes, Route, Navigate } from "react-router-native";
+import theme from "../theme";
 import AppBar from "./AppBar";
 import RepositoryList from "./RepositoryList";
 import SignIn from "./SignIn";
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: theme.fonts.main,
     marginTop: Constants.statusBarHeight,
     flexGrow: 1,
     flexShrink: 1,
