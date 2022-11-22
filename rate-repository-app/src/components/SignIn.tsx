@@ -3,7 +3,7 @@ import { Formik, FormikHelpers, FormikProps } from "formik";
 import FormikTextInput from "./FormikTextInput";
 import theme from "../theme";
 import z from "zod";
-import { toFormikValidationSchema } from "../zod-formik-adapter";
+import { toFormikValidationSchema } from "../utils/zod-formik-adapter";
 
 const initialValues = {
   username: "",
