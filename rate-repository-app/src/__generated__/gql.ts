@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  fragment RepositoryItem on Repository {\n      id\n      fullName\n      description\n      language\n      forksCount\n      stargazersCount\n      ratingAverage\n      reviewCount\n      ownerAvatarUrl\n    }\n": types.RepositoryItemFragmentDoc,
+    "\n  mutation AuthenticateUser($username: String!, $password: String!) {\n    authenticate(credentials: { username: $username, password: $password }) {\n      accessToken\n    }\n  }\n": types.AuthenticateUserDocument,
     "\n  query GetRepositories {\n    repositories {\n      edges {\n        node {\n          ...RepositoryItem\n        }\n      }\n    }\n  }\n": types.GetRepositoriesDocument,
 };
 
@@ -21,6 +22,10 @@ const documents = {
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  fragment RepositoryItem on Repository {\n      id\n      fullName\n      description\n      language\n      forksCount\n      stargazersCount\n      ratingAverage\n      reviewCount\n      ownerAvatarUrl\n    }\n"): (typeof documents)["\n  fragment RepositoryItem on Repository {\n      id\n      fullName\n      description\n      language\n      forksCount\n      stargazersCount\n      ratingAverage\n      reviewCount\n      ownerAvatarUrl\n    }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation AuthenticateUser($username: String!, $password: String!) {\n    authenticate(credentials: { username: $username, password: $password }) {\n      accessToken\n    }\n  }\n"): (typeof documents)["\n  mutation AuthenticateUser($username: String!, $password: String!) {\n    authenticate(credentials: { username: $username, password: $password }) {\n      accessToken\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

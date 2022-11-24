@@ -1,9 +1,10 @@
 import { Text, Pressable, View, StyleSheet } from "react-native";
-import { Formik, FormikHelpers, FormikProps } from "formik";
+import { Formik, FormikProps } from "formik";
 import FormikTextInput from "./FormikTextInput";
 import theme from "../theme";
 import z from "zod";
 import { toFormikValidationSchema } from "../utils/zod-formik-adapter";
+import useSignin from "../hooks/useSignin";
 
 const initialValues = {
   username: "",
@@ -49,21 +50,15 @@ const styles = StyleSheet.create({
 });
 
 function SignIn() {
-  function submitFormik(
-    values: Values,
-    { setSubmitting }: FormikHelpers<Values>
-  ) {
-    console.log(values);
-    setSubmitting(false);
-  }
+  const [submitCredentials] = useSignin();
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={submitFormik}
+      onSubmit={submitCredentials}
       validationSchema={toFormikValidationSchema(validationSchema)}
     >
-      {({ submitForm }: FormikProps<Values>) => (
+      {({ submitForm, isSubmitting }: FormikProps<Values>) => (
         <View style={styles.form}>
           <FormikTextInput
             style={styles.textInput}
@@ -76,7 +71,11 @@ function SignIn() {
             placeholder="Password"
             secureTextEntry
           />
-          <Pressable style={styles.submitButton} onPress={submitForm}>
+          <Pressable
+            style={styles.submitButton}
+            onPress={submitForm}
+            disabled={isSubmitting}
+          >
             <Text style={styles.submitText}>Sign In</Text>
           </Pressable>
         </View>
