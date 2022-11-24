@@ -12,7 +12,21 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
   ],
-  overrides: [],
+  overrides: [
+    {
+      files: ["*.{ts,tsx}"],
+      processor: "@graphql-eslint/graphql",
+      extends: ["plugin:prettier/recommended"],
+    },
+    {
+      files: ["*.graphql"],
+      parser: "@graphql-eslint/eslint-plugin",
+      plugins: ["@graphql-eslint"],
+      rules: {
+        "prettier/prettier": "error",
+      },
+    },
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
