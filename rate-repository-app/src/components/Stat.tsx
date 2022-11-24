@@ -3,7 +3,7 @@ import { PrimaryText, SecondaryText } from "./Text";
 
 interface StatProps extends TextProps {
   label: string;
-  value: number;
+  value?: number | null;
 }
 
 const statStyles = StyleSheet.create({
@@ -26,7 +26,7 @@ function Stat({ label, value }: StatProps) {
   return (
     <View style={statStyles.container}>
       <PrimaryText style={statStyles.textPrimary}>
-        {formatNumber(value)}
+        {value ? formatNumber(value) : "N/A"}
       </PrimaryText>
       <SecondaryText>{label}</SecondaryText>
     </View>

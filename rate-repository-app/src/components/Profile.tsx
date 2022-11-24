@@ -1,11 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import { PrimaryText, SecondaryText } from "./Text";
 import Tag from "./Tag";
-import { Repository } from "./RepositoryList";
+import { RepositoryItemFragment } from "../__generated__/graphql";
 
-interface ProfileProps {
-  item: Repository;
-}
+type ProfileProps = Pick<
+  RepositoryItemFragment,
+  "fullName" | "description" | "language"
+>;
 
 const profileStyles = StyleSheet.create({
   fullname: {
@@ -16,15 +17,15 @@ const profileStyles = StyleSheet.create({
   },
 });
 
-function Profile({ item }: ProfileProps) {
+function Profile({ fullName, description, language }: ProfileProps) {
   return (
     <>
-      <PrimaryText style={profileStyles.fullname}>{item.fullName}</PrimaryText>
+      <PrimaryText style={profileStyles.fullname}>{fullName}</PrimaryText>
       <SecondaryText style={profileStyles.description}>
-        {item.description}
+        {description}
       </SecondaryText>
       <View>
-        <Tag>{item.language}</Tag>
+        <Tag>{language}</Tag>
       </View>
     </>
   );

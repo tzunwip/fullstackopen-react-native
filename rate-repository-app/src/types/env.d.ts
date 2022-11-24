@@ -1,3 +1,3 @@
-declare module '@env' {
-  export const LOCAL_SERVER_IP: string;
+declare module "@env" {
+  export const LOCAL_IP: string;
 }

@@ -6,7 +6,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "compile-gql": "graphql-codegen -r dotenv/config",
+    "compile-gql:watch": "npm run compile-gql -- -w"
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
@@ -14,6 +16,7 @@
     "@expo/webpack-config": "^0.17.0",
     "@types/react": "~18.0.0",
     "@types/react-native": "~0.69.1",
+    "dotenv": "^16.0.3",
     "expo": "~46.0.16",
     "expo-status-bar": "~1.4.0",
     "formik": "^2.2.9",
@@ -27,6 +30,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@graphql-codegen/cli": "^2.13.12",
+    "@graphql-codegen/client-preset": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",

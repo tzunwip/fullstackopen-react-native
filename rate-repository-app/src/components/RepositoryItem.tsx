@@ -1,10 +1,11 @@
 import { StyleSheet, View, Image } from "react-native";
 import Stat from "./Stat";
 import Profile from "./Profile";
-import { Repository } from "./RepositoryList";
+import { FragmentType, useFragment } from "../__generated__/";
+import { RepositoryItemFragment } from "../graphql/fragments";
 
 interface RepositoryItemProps {
-  item: Repository;
+  item: FragmentType<typeof RepositoryItemFragment>;
 }
 
 const styles = StyleSheet.create({
@@ -32,22 +33,34 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RepositoryItem(props: RepositoryItemProps) {
-  const { item } = props;
+export default function RepositoryItem({ item }: RepositoryItemProps) {
+  const repository = useFragment(RepositoryItemFragment, item);
+  const {
+    fullName,
+    description,
+    language,
+    ownerAvatarUrl,
+    stargazersCount,
+    forksCount,
+    reviewCount,
+    ratingAverage,
+  } = repository;
 
   return (
     <View style={styles.container}>
-      <View>
-        <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
-      </View>
+      {ownerAvatarUrl && (
+        <View>
+          <Image style={styles.image} source={{ uri: ownerAvatarUrl }} />
+        </View>
+      )}
       <View style={styles.profile}>
-        <Profile item={item} />
+        <Profile {...{ fullName, description, language }} />
       </View>
       <View style={styles.statLine}>
-        <Stat label="Stars" value={item.stargazersCount} />
-        <Stat label="Forks" value={item.forksCount} />
-        <Stat label="Reviews" value={item.reviewCount} />
-        <Stat label="Rating" value={item.ratingAverage} />
+        <Stat label="Stars" value={stargazersCount} />
+        <Stat label="Forks" value={forksCount} />
+        <Stat label="Reviews" value={reviewCount} />
+        <Stat label="Rating" value={ratingAverage} />
       </View>
     </View>
   );
