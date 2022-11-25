@@ -7,7 +7,7 @@ interface AppBarButtonProps extends PressableProps {
   to: string;
 }
 
-const appBarButtonStyles = StyleSheet.create({
+export const appBarButtonStyles = StyleSheet.create({
   pressable: {
     marginLeft: 10,
   },
@@ -18,9 +18,9 @@ const appBarButtonStyles = StyleSheet.create({
   },
 });
 
-function AppBarButton({ label, to }: AppBarButtonProps) {
+function AppBarButton({ label, to, ...rest }: AppBarButtonProps) {
   return (
-    <Pressable style={appBarButtonStyles.pressable}>
+    <Pressable style={appBarButtonStyles.pressable} {...rest}>
       <Link to={to}>
         <Text style={appBarButtonStyles.text}>{label}</Text>
       </Link>

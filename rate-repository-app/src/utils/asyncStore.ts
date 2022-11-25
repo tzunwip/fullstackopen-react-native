@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export async function setStore<T>(key: string, data: T) {
+type Key = "accessToken";
+
+export async function setStore<T>(key: Key, data: T) {
   try {
     const stringifiedData = JSON.stringify(data);
     await AsyncStorage.setItem(key, stringifiedData);
@@ -9,7 +11,7 @@ export async function setStore<T>(key: string, data: T) {
   }
 }
 
-export async function removeStore(key: string) {
+export async function removeStore(key: Key) {
   try {
     await AsyncStorage.removeItem(key);
   } catch (error: unknown) {
@@ -17,10 +19,11 @@ export async function removeStore(key: string) {
   }
 }
 
-export async function getStore(key: string) {
+export async function getStore(key: Key) {
   try {
     const value = await AsyncStorage.getItem(key);
-    return value;
+    if (value) return JSON.parse(value);
+    return null;
   } catch (error: unknown) {
     if (error instanceof Error) throw Error(error.message);
   }

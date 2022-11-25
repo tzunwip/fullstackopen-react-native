@@ -11,3 +11,11 @@ export const GET_REPOSITORIES = gql(/* GraphQL */ `
     }
   }
 `);
+
+export const GET_ME = gql(/* GraphQL */ `
+  query Me {
+    me {
+      ...Me
+    }
+  }
+`);

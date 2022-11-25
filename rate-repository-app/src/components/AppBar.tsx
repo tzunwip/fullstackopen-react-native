@@ -2,6 +2,7 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import AppBarButton from "./AppBarButton";
 import Constants from "expo-constants";
 import theme from "../theme";
+import SignOutButton from "./SignOutButton";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +17,7 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <AppBarButton label="Sign In" to="/signin" />
+        <SignOutButton />
         <AppBarButton label="Respositories" to="/" />
       </ScrollView>
     </View>
