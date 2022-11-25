@@ -1,7 +1,7 @@
 import { FormikHelpers } from "formik";
 import { useMutation } from "@apollo/client";
 import { AUTHENTICATE } from "../graphql/mutations";
-import { storeData } from "../utils/asyncStore";
+import { setStore, getStore } from "../utils/asyncStore";
 import { Values } from "../components/SignIn";
 import { useNavigate } from "react-router-native";
 
@@ -20,8 +20,7 @@ function useSignin() {
       const res = await authenticateUser({
         variables: { username, password },
       });
-      storeData("accessToken", res?.data?.authenticate?.accessToken);
-      console.log("token", res?.data?.authenticate?.accessToken);
+      await setStore("accessToken", res?.data?.authenticate?.accessToken);
     } catch (error: unknown) {
       if (error instanceof Error) throw Error(error.message);
     } finally {
