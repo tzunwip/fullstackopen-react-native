@@ -1,9 +1,9 @@
-import { StyleSheet, TextInputProps } from "react-native";
 import { useField } from "formik";
+import { StyleSheet, TextInputProps } from "react-native";
 
-import TextInput from "./TextInput";
-import { PrimaryText } from "./Text";
 import theme from "../theme";
+import { PrimaryText } from "./Text";
+import TextInput from "./TextInput";
 
 interface FormikTextInputProps extends TextInputProps {
   name: string;

@@ -1,4 +1,5 @@
 import { TextProps, StyleSheet, View } from "react-native";
+
 import { PrimaryText, SecondaryText } from "./Text";
 
 interface StatProps extends TextProps {

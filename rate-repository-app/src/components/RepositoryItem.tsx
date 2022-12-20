@@ -1,8 +1,9 @@
 import { StyleSheet, View, Image } from "react-native";
-import Stat from "./Stat";
-import Profile from "./Profile";
+
 import { FragmentType, useFragment } from "../__generated__/";
 import { RepositoryItemFragment } from "../graphql/fragments";
+import Profile from "./Profile";
+import Stat from "./Stat";
 
 interface RepositoryItemProps {
   item: FragmentType<typeof RepositoryItemFragment>;
@@ -50,7 +51,11 @@ export default function RepositoryItem({ item }: RepositoryItemProps) {
     <View style={styles.container}>
       {ownerAvatarUrl && (
         <View>
-          <Image style={styles.image} source={{ uri: ownerAvatarUrl }} />
+          <Image
+            style={styles.image}
+            source={{ uri: ownerAvatarUrl }}
+            accessibilityIgnoresInvertColors={false}
+          />
         </View>
       )}
       <View style={styles.profile}>

@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { GET_REPOSITORIES } from "../graphql/queries";
 import { FlatList, View, StyleSheet } from "react-native";
+
+import { GET_REPOSITORIES } from "../graphql/queries";
 import RepositoryItem from "./RepositoryItem";
 import { PrimaryText } from "./Text";
 

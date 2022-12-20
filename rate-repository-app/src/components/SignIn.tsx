@@ -1,10 +1,11 @@
-import { Text, Pressable, View, StyleSheet } from "react-native";
 import { Formik, FormikProps } from "formik";
-import FormikTextInput from "./FormikTextInput";
-import theme from "../theme";
+import { Text, Pressable, View, StyleSheet } from "react-native";
 import z from "zod";
-import { toFormikValidationSchema } from "../utils/zod-formik-adapter";
+
 import useSignin from "../hooks/useSignin";
+import theme from "../theme";
+import { toFormikValidationSchema } from "../utils/zod-formik-adapter";
+import FormikTextInput from "./FormikTextInput";
 
 const initialValues = {
   username: "",
@@ -72,6 +73,7 @@ function SignIn() {
             secureTextEntry
           />
           <Pressable
+            accessibilityRole="button"
             style={styles.submitButton}
             onPress={submitForm}
             disabled={isSubmitting}

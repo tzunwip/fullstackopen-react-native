@@ -7,6 +7,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { LOCAL_IP } from "@env";
+
 import { getStore } from "./asyncStore";
 
 interface ApolloContext {

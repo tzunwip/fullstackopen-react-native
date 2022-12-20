@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, TextProps } from "react-native";
+
 import theme from "../theme";
 
 const tagStyles = StyleSheet.create({

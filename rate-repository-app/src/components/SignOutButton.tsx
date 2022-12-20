@@ -1,6 +1,7 @@
 import { useApolloClient } from "@apollo/client";
 import { Pressable, Text } from "react-native";
 import { useNavigate } from "react-router-native";
+
 import { removeStore } from "../utils/asyncStore";
 import { appBarButtonStyles } from "./AppBarButton";
 
@@ -15,7 +16,11 @@ function SignOutButton() {
   }
 
   return (
-    <Pressable style={appBarButtonStyles.pressable} onPress={handleSignOut}>
+    <Pressable
+      accessibilityRole="button"
+      style={appBarButtonStyles.pressable}
+      onPress={handleSignOut}
+    >
       <Text style={appBarButtonStyles.text}>Sign Out</Text>
     </Pressable>
   );

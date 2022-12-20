@@ -1,4 +1,5 @@
 import { TextProps, Text } from "react-native";
+
 import theme from "../theme";
 
 export function PrimaryText({ style, ...props }: TextProps) {

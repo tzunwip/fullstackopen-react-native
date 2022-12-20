@@ -1,7 +1,8 @@
 import { StyleSheet, View } from "react-native";
-import { PrimaryText, SecondaryText } from "./Text";
-import Tag from "./Tag";
+
 import { RepositoryItemFragment } from "../__generated__/graphql";
+import Tag from "./Tag";
+import { PrimaryText, SecondaryText } from "./Text";
 
 type ProfileProps = Pick<
   RepositoryItemFragment,

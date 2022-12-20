@@ -1,7 +1,8 @@
-import { View, StyleSheet, ScrollView } from "react-native";
-import AppBarButton from "./AppBarButton";
 import Constants from "expo-constants";
+import { View, StyleSheet, ScrollView } from "react-native";
+
 import theme from "../theme";
+import AppBarButton from "./AppBarButton";
 import SignOutButton from "./SignOutButton";
 
 const styles = StyleSheet.create({

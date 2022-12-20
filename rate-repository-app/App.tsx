@@ -1,7 +1,8 @@
-import { NativeRouter } from "react-router-native";
-import { StatusBar } from "expo-status-bar";
-import Main from "./src/components/Main";
 import { ApolloProvider } from "@apollo/client";
+import { StatusBar } from "expo-status-bar";
+import { NativeRouter } from "react-router-native";
+
+import Main from "./src/components/Main";
 import createApolloClient from "./src/utils/apolloClient";
 
 const apolloClient = createApolloClient();

@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInputProps as NativeTextInputProps,
 } from "react-native";
+
 import theme from "../theme";
 
 type TextInputProps = NativeTextInputProps &

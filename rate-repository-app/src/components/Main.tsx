@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import Constants from "expo-constants";
 import { StyleSheet, View } from "react-native";
 import { Routes, Route, Navigate } from "react-router-native";
+
 import { GET_ME } from "../graphql/queries";
 import theme from "../theme";
 import AuthWrapper from "./AuthWrapper";

@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router-native";
+
 import { MeQuery } from "../__generated__/graphql";
 
 interface AuthWrapperProps {
