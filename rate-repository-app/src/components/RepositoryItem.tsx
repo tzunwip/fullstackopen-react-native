@@ -48,7 +48,7 @@ export default function RepositoryItem({ item }: RepositoryItemProps) {
   } = repository;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repository-item">
       {ownerAvatarUrl && (
         <View>
           <Image
@@ -62,10 +62,22 @@ export default function RepositoryItem({ item }: RepositoryItemProps) {
         <Profile {...{ fullName, description, language }} />
       </View>
       <View style={styles.statLine}>
-        <Stat label="Stars" value={stargazersCount} />
-        <Stat label="Forks" value={forksCount} />
-        <Stat label="Reviews" value={reviewCount} />
-        <Stat label="Rating" value={ratingAverage} />
+        <Stat
+          label="Stars"
+          value={stargazersCount}
+          testID="repository-item-stars"
+        />
+        <Stat label="Forks" value={forksCount} testID="repository-item-forks" />
+        <Stat
+          label="Reviews"
+          value={reviewCount}
+          testID="repository-item-reviews"
+        />
+        <Stat
+          label="Rating"
+          value={ratingAverage}
+          testID="repository-item-rating"
+        />
       </View>
     </View>
   );

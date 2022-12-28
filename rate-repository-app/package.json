@@ -28,13 +28,17 @@
     "react-native": "0.69.6",
     "react-native-web": "~0.18.7",
     "react-router-native": "^6.4.3",
-    "zod": "^3.19.1"
+    "zod": "^3.19.1",
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@graphql-codegen/cli": "^2.13.12",
     "@graphql-codegen/client-preset": "^1.1.5",
     "@graphql-eslint/eslint-plugin": "^3.13.1",
+    "@testing-library/jest-native": "^5.3.3",
+    "@testing-library/react-native": "^11.5.0",
+    "@types/jest": "^29.2.4",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
@@ -44,11 +48,15 @@
     "jest": "^27.5.1",
     "jest-expo": "^47.0.1",
     "prettier": "^2.7.1",
-    "react-native-dotenv": "^3.4.2"
+    "react-native-dotenv": "^3.4.2",
+    "react-test-renderer": "^18.2.0"
   },
   "private": true,
   "jest": {
     "preset": "jest-expo",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },

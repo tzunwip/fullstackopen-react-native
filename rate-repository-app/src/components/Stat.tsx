@@ -23,9 +23,9 @@ function formatNumber(num: number) {
   return Intl.NumberFormat("en", { notation: "compact" }).format(num);
 }
 
-function Stat({ label, value }: StatProps) {
+function Stat({ label, value, testID }: StatProps) {
   return (
-    <View style={statStyles.container}>
+    <View style={statStyles.container} testID={testID}>
       <PrimaryText style={statStyles.textPrimary}>
         {value ? formatNumber(value) : "N/A"}
       </PrimaryText>
