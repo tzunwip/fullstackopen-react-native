@@ -1,5 +1,11 @@
 import { ApolloProvider } from "@apollo/client";
-import { render, fireEvent, act, waitFor } from "@testing-library/react-native";
+import {
+  render,
+  fireEvent,
+  act,
+  waitFor,
+  screen,
+} from "@testing-library/react-native";
 import { NativeRouter } from "react-router-native";
 
 import apolloClient from "../../utils/apolloClient";
@@ -8,7 +14,7 @@ import SignIn from "../SignIn";
 describe("SignIn", () => {
   describe("SignInContainer", () => {
     it("calls onSubmit function with correct arguments when a valid form is submitted", async () => {
-      const { getByRole, getByPlaceholderText, debug } = render(
+      render(
         <NativeRouter>
           <ApolloProvider client={apolloClient()}>
             <SignIn />
@@ -16,15 +22,15 @@ describe("SignIn", () => {
         </NativeRouter>
       );
 
-      const usernameField = getByPlaceholderText("Username");
-      const passwordField = getByPlaceholderText("Password");
-      const signinButton = getByRole("button", { name: "Sign In" });
+      const usernameField = screen.getByPlaceholderText("Username");
+      const passwordField = screen.getByPlaceholderText("Password");
+      const signinButton = screen.getByRole("button", { name: "Sign In" });
 
       expect(usernameField).toBeDefined();
       expect(passwordField).toBeDefined();
       expect(signinButton).toBeDefined();
 
-      const mockUsername = "billy";
+      const mockUsername = "username";
       const mockPassword = "password";
 
       act(() => {
@@ -33,7 +39,10 @@ describe("SignIn", () => {
         fireEvent.press(signinButton);
       });
 
-      expect(signinButton).toBeDisabled();
+      await waitFor(() => expect(signinButton).toBeDisabled());
+
+      // wait for fetch to complete before ending test to avoid act wrapper warnings
+      await waitFor(() => expect(signinButton).toBeEnabled());
     });
   });
 });
