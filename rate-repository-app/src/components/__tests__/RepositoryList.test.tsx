@@ -1,11 +1,5 @@
 import { MockedProvider } from "@apollo/client/testing";
-import {
-  getDefaultNormalizer,
-  render,
-  screen,
-  waitFor,
-  within,
-} from "@testing-library/react-native";
+import { render, within, screen } from "@testing-library/react-native";
 
 import { GET_REPOSITORIES } from "../../graphql/queries";
 import RepositoryList from "../RepositoryList";
@@ -203,7 +197,7 @@ describe("RepositoryList", () => {
       expect(repositoryItems).toHaveLength(mockData.repositories.edges.length);
 
       repositoryItems.forEach((repositoryItem, index) => {
-        const repositoryData = mockData.repositories.edges[index];
+        const repositoryData = mockData.repositories.edges[index].node;
         const {
           fullName,
           description,
@@ -212,7 +206,7 @@ describe("RepositoryList", () => {
           stargazersCount,
           ratingAverage,
           reviewCount,
-        } = repositoryData.node;
+        } = repositoryData;
 
         function countText(count: number) {
           return count === 0
@@ -221,6 +215,7 @@ describe("RepositoryList", () => {
                 .format(count)
                 .toString();
         }
+
         const starsElement = within(repositoryItem).getByTestId(
           "repository-item-stars"
         );
