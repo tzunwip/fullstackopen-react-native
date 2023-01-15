@@ -2,9 +2,17 @@ import { useMutation } from "@apollo/client";
 import { FormikHelpers } from "formik";
 import { useNavigate } from "react-router-native";
 
+import { gql } from "../__generated__";
 import { Values } from "../components/SignIn";
-import { AUTHENTICATE } from "../graphql/mutations";
 import { setStore } from "../utils/asyncStore";
+
+const AUTHENTICATE = gql(/* GraphQL */ `
+  mutation AuthenticateUser($username: String!, $password: String!) {
+    authenticate(credentials: { username: $username, password: $password }) {
+      accessToken
+    }
+  }
+`);
 
 function useSignin() {
   const navigate = useNavigate();

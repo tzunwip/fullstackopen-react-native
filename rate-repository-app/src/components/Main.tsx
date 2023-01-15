@@ -3,7 +3,7 @@ import Constants from "expo-constants";
 import { StyleSheet, View, Text } from "react-native";
 import { Routes, Route, Navigate } from "react-router-native";
 
-import { GET_ME } from "../graphql/queries";
+import { gql } from "../__generated__/";
 import theme from "../theme";
 import AuthWrapper from "./AuthWrapper";
 import MainLayout from "./MainLayout";
@@ -19,6 +19,15 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
 });
+
+const GET_ME = gql(/* GraphQL */ `
+  query Me {
+    me {
+      id
+      username
+    }
+  }
+`);
 
 const Main = () => {
   const { data, loading } = useQuery(GET_ME);

@@ -1,9 +1,25 @@
 import { useQuery } from "@apollo/client";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { useParams } from "react-router-native";
 
-import { GET_REPOSITORY } from "../graphql/queries";
+import { gql } from "../__generated__";
 import RepositoryItem from "./RepositoryItem";
+import RepositoryReview from "./RepositoryReview";
+
+const GET_REPOSITORY = gql(/* GraphQL */ `
+  query GetRepository($id: ID!) {
+    repository(id: $id) {
+      ...RepositoryProfile
+      reviews {
+        edges {
+          node {
+            ...RepositoryReview
+          }
+        }
+      }
+    }
+  }
+`);
 
 function RepositoryView() {
   const { repositoryId } = useParams();
@@ -13,12 +29,18 @@ function RepositoryView() {
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>There seems to be an error.</Text>;
-  if (!data || !data.repository)
-    return <Text>Repository could not be found!</Text>;
+  if (!data?.repository) return <Text>Repository could not be found!</Text>;
+
+  const renderItem = ({
+    item,
+  }: {
+    item: typeof data.repository.reviews.edges[number];
+  }) => <RepositoryReview item={item.node} />;
 
   return (
     <View>
       <RepositoryItem item={data.repository} showGithubLink />
+      <FlatList data={data.repository.reviews.edges} renderItem={renderItem} />
     </View>
   );
 }

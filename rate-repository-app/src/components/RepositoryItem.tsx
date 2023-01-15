@@ -1,16 +1,10 @@
 import { A } from "@expo/html-elements";
 import { StyleSheet, View, Image } from "react-native";
 
-import { FragmentType, useFragment } from "../__generated__/";
-import { RepositoryItemFragment } from "../graphql/fragments";
+import { gql, FragmentType, useFragment } from "../__generated__/";
 import theme from "../theme";
 import Profile from "./Profile";
 import Stat from "./Stat";
-
-export interface RepositoryItemProps {
-  item: FragmentType<typeof RepositoryItemFragment>;
-  showGithubLink?: boolean;
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -46,11 +40,30 @@ const styles = StyleSheet.create({
   },
 });
 
+const RepositoryProfileFragment = gql(/* GraphQL */ `
+  fragment RepositoryProfile on Repository {
+    id
+    fullName
+    description
+    language
+    forksCount
+    stargazersCount
+    ratingAverage
+    reviewCount
+    ownerAvatarUrl
+    url
+  }
+`);
+
+export interface RepositoryItemProps {
+  item: FragmentType<typeof RepositoryProfileFragment>;
+  showGithubLink?: boolean;
+}
+
 export default function RepositoryItem({
   item,
   showGithubLink = false,
 }: RepositoryItemProps) {
-  const repository = useFragment(RepositoryItemFragment, item);
   const {
     fullName,
     description,
@@ -61,7 +74,7 @@ export default function RepositoryItem({
     reviewCount,
     ratingAverage,
     url,
-  } = repository;
+  } = useFragment(RepositoryProfileFragment, item);
 
   return (
     <View style={styles.container} testID="repository-item">
