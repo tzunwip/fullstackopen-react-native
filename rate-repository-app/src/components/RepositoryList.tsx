@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet } from "react-native";
 
 import { GET_REPOSITORIES } from "../graphql/queries";
 import RepositoryItem from "./RepositoryItem";
+import RepositoryListItemWrapper from "./RepositoryListItemWrapper";
 import { PrimaryText } from "./Text";
 
 const styles = StyleSheet.create({
@@ -26,7 +27,11 @@ const RepositoryList = () => {
     <FlatList
       data={data.repositories.edges}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <RepositoryItem item={item.node} />}
+      renderItem={({ item }) => (
+        <RepositoryListItemWrapper item={item.node}>
+          <RepositoryItem item={item.node} />
+        </RepositoryListItemWrapper>
+      )}
     />
   );
 };

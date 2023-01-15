@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import Constants from "expo-constants";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Routes, Route, Navigate } from "react-router-native";
 
 import { GET_ME } from "../graphql/queries";
@@ -8,6 +8,7 @@ import theme from "../theme";
 import AuthWrapper from "./AuthWrapper";
 import MainLayout from "./MainLayout";
 import RepositoryList from "./RepositoryList";
+import RepositoryView from "./RepositoryView";
 import SignIn from "./SignIn";
 
 const styles = StyleSheet.create({
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
 const Main = () => {
   const { data, loading } = useQuery(GET_ME);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Text>Loading...</Text>;
 
   return (
     <>
@@ -32,6 +33,10 @@ const Main = () => {
           <Route element={<AuthWrapper me={data?.me} />}>
             <Route element={<MainLayout />}>
               <Route path="/" element={<RepositoryList />} />
+              <Route path="repository">
+                <Route path=":repositoryId" element={<RepositoryView />} />
+                <Route index element={<RepositoryList />} />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<Navigate to="/signin" replace />} />

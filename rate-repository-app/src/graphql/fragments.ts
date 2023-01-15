@@ -11,6 +11,7 @@ export const RepositoryItemFragment = gql(/* GraphQL */ `
     ratingAverage
     reviewCount
     ownerAvatarUrl
+    url
   }
 `);
 

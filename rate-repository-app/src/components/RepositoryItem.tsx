@@ -1,12 +1,15 @@
+import { A } from "@expo/html-elements";
 import { StyleSheet, View, Image } from "react-native";
 
 import { FragmentType, useFragment } from "../__generated__/";
 import { RepositoryItemFragment } from "../graphql/fragments";
+import theme from "../theme";
 import Profile from "./Profile";
 import Stat from "./Stat";
 
-interface RepositoryItemProps {
+export interface RepositoryItemProps {
   item: FragmentType<typeof RepositoryItemFragment>;
+  showGithubLink?: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -26,15 +29,27 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     margin: 10,
+    width: 200,
   },
   statLine: {
     display: "flex",
     flexDirection: "row",
     margin: 10,
   },
+  gitHubLinkText: {
+    backgroundColor: theme.colors.viewSecondary,
+    color: theme.colors.viewSecondaryText,
+    margin: 10,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
 });
 
-export default function RepositoryItem({ item }: RepositoryItemProps) {
+export default function RepositoryItem({
+  item,
+  showGithubLink = false,
+}: RepositoryItemProps) {
   const repository = useFragment(RepositoryItemFragment, item);
   const {
     fullName,
@@ -45,6 +60,7 @@ export default function RepositoryItem({ item }: RepositoryItemProps) {
     forksCount,
     reviewCount,
     ratingAverage,
+    url,
   } = repository;
 
   return (
@@ -79,6 +95,13 @@ export default function RepositoryItem({ item }: RepositoryItemProps) {
           testID="repository-item-rating"
         />
       </View>
+      {showGithubLink && url && (
+        <View>
+          <A href={url} target="_blank" style={styles.gitHubLinkText}>
+            Open in GitHub
+          </A>
+        </View>
+      )}
     </View>
   );
 }

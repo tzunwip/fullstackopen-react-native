@@ -13,17 +13,18 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  fragment RepositoryItem on Repository {\n    id\n    fullName\n    description\n    language\n    forksCount\n    stargazersCount\n    ratingAverage\n    reviewCount\n    ownerAvatarUrl\n  }\n": types.RepositoryItemFragmentDoc,
+    "\n  fragment RepositoryItem on Repository {\n    id\n    fullName\n    description\n    language\n    forksCount\n    stargazersCount\n    ratingAverage\n    reviewCount\n    ownerAvatarUrl\n    url\n  }\n": types.RepositoryItemFragmentDoc,
     "\n  fragment Me on User {\n    id\n    username\n  }\n": types.MeFragmentDoc,
     "\n  mutation AuthenticateUser($username: String!, $password: String!) {\n    authenticate(credentials: { username: $username, password: $password }) {\n      accessToken\n    }\n  }\n": types.AuthenticateUserDocument,
     "\n  query GetRepositories {\n    repositories {\n      edges {\n        node {\n          ...RepositoryItem\n        }\n      }\n    }\n  }\n": types.GetRepositoriesDocument,
+    "\n  query GetRepository($id: ID!) {\n    repository(id: $id) {\n      ...RepositoryItem\n    }\n  }\n": types.GetRepositoryDocument,
     "\n  query Me {\n    me {\n      ...Me\n    }\n  }\n": types.MeDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment RepositoryItem on Repository {\n    id\n    fullName\n    description\n    language\n    forksCount\n    stargazersCount\n    ratingAverage\n    reviewCount\n    ownerAvatarUrl\n  }\n"): (typeof documents)["\n  fragment RepositoryItem on Repository {\n    id\n    fullName\n    description\n    language\n    forksCount\n    stargazersCount\n    ratingAverage\n    reviewCount\n    ownerAvatarUrl\n  }\n"];
+export function gql(source: "\n  fragment RepositoryItem on Repository {\n    id\n    fullName\n    description\n    language\n    forksCount\n    stargazersCount\n    ratingAverage\n    reviewCount\n    ownerAvatarUrl\n    url\n  }\n"): (typeof documents)["\n  fragment RepositoryItem on Repository {\n    id\n    fullName\n    description\n    language\n    forksCount\n    stargazersCount\n    ratingAverage\n    reviewCount\n    ownerAvatarUrl\n    url\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -36,6 +37,10 @@ export function gql(source: "\n  mutation AuthenticateUser($username: String!, $
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetRepositories {\n    repositories {\n      edges {\n        node {\n          ...RepositoryItem\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetRepositories {\n    repositories {\n      edges {\n        node {\n          ...RepositoryItem\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetRepository($id: ID!) {\n    repository(id: $id) {\n      ...RepositoryItem\n    }\n  }\n"): (typeof documents)["\n  query GetRepository($id: ID!) {\n    repository(id: $id) {\n      ...RepositoryItem\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
