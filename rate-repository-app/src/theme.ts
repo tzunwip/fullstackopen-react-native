@@ -9,6 +9,11 @@ const theme = {
     textPrimary: "#000000",
     textSecondary: "#586069",
     error: "#d73a4a",
+    green: "#2dc937",
+    lightGreen: "#99c140",
+    amber: "#e7b416",
+    orange: "#db7b2b",
+    red: "#cc3232",
   },
   fontSizes: {
     body: 14,

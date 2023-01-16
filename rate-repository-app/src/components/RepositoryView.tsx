@@ -1,10 +1,19 @@
 import { useQuery } from "@apollo/client";
-import { View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 import { useParams } from "react-router-native";
 
 import { gql } from "../__generated__";
 import RepositoryItem from "./RepositoryItem";
 import RepositoryReview from "./RepositoryReview";
+
+const styles = StyleSheet.create({
+  separator: {
+    height: 1,
+    backgroundColor: "lightgrey",
+  },
+});
+
+const ItemSeparator = () => <View style={styles.separator} />;
 
 const GET_REPOSITORY = gql(/* GraphQL */ `
   query GetRepository($id: ID!) {
@@ -13,6 +22,7 @@ const GET_REPOSITORY = gql(/* GraphQL */ `
       reviews {
         edges {
           node {
+            id
             ...RepositoryReview
           }
         }
@@ -31,16 +41,23 @@ function RepositoryView() {
   if (error) return <Text>There seems to be an error.</Text>;
   if (!data?.repository) return <Text>Repository could not be found!</Text>;
 
-  const renderItem = ({
-    item,
-  }: {
+  interface FlatListMethodParams {
     item: typeof data.repository.reviews.edges[number];
-  }) => <RepositoryReview item={item.node} />;
+  }
+
+  const renderItem = ({ item }: FlatListMethodParams) => (
+    <RepositoryReview item={item.node} />
+  );
 
   return (
     <View>
       <RepositoryItem item={data.repository} showGithubLink />
-      <FlatList data={data.repository.reviews.edges} renderItem={renderItem} />
+      <FlatList
+        data={data.repository.reviews.edges}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.node.id}
+        ItemSeparatorComponent={ItemSeparator}
+      />
     </View>
   );
 }
