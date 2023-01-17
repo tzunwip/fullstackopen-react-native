@@ -5,14 +5,21 @@ import { Menu, Button } from "react-native-paper";
 
 import { gql } from "../__generated__";
 import { GetRepositoriesQueryVariables } from "../__generated__/graphql";
+import theme from "../theme";
 import RepositoryItem from "./RepositoryItem";
 import RepositoryListItemWrapper from "./RepositoryListItemWrapper";
 import { PrimaryText } from "./Text";
 
 const styles = StyleSheet.create({
   separator: {
-    height: 10,
+    height: 2,
     backgroundColor: "lightgrey",
+  },
+  menu: {
+    alignSelf: "flex-start",
+  },
+  menuButton: {
+    color: theme.colors.textPrimary,
   },
 });
 
@@ -38,20 +45,23 @@ type SortMode = "latest" | "highestRated" | "lowestRated";
 
 type SortConfig = Record<
   SortMode,
-  { title: string; variables: GetRepositoriesQueryVariables }
+  { title: string; icon: string; variables: GetRepositoriesQueryVariables }
 >;
 
 const sortConfig: SortConfig = {
   latest: {
     title: "Latest",
+    icon: "sort-clock-ascending-outline",
     variables: { orderBy: "CREATED_AT", orderDirection: "DESC" },
   },
   highestRated: {
     title: "Highest Rated",
+    icon: "sort-variant",
     variables: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" },
   },
   lowestRated: {
     title: "Lowest Rated",
+    icon: "sort-reverse-variant",
     variables: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
   },
 };
@@ -86,13 +96,17 @@ const RepositoryList = () => {
 
   return (
     <>
-      <View>
+      <View style={styles.menu}>
         <Menu
           visible={showMenu}
           onDismiss={() => setShowMenu(false)}
           anchor={
-            <Button onPress={() => setShowMenu(true)}>
-              Sort by {sortConfig[sortMode].title}
+            <Button
+              icon={sortConfig[sortMode].icon}
+              onPress={() => setShowMenu(true)}
+              labelStyle={styles.menuButton}
+            >
+              Sorted by {sortConfig[sortMode].title}
             </Button>
           }
         >
