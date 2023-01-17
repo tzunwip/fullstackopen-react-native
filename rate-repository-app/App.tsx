@@ -1,5 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
+import { Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter } from "react-router-native";
 
 import Main from "./src/components/Main";
@@ -13,7 +14,9 @@ const App = () => {
       <StatusBar style="auto" />
       <NativeRouter>
         <ApolloProvider client={apolloClient}>
-          <Main />
+          <PaperProvider>
+            <Main />
+          </PaperProvider>
         </ApolloProvider>
       </NativeRouter>
     </>
