@@ -5,6 +5,7 @@ import z from "zod";
 import useSignin from "../hooks/useSignin";
 import theme from "../theme";
 import { toFormikValidationSchema } from "../utils/zod-formik-adapter";
+import FormikError from "./FormikError";
 import FormikTextInput from "./FormikTextInput";
 
 const initialValues = {
@@ -59,7 +60,7 @@ function SignIn() {
       onSubmit={submitCredentials}
       validationSchema={toFormikValidationSchema(validationSchema)}
     >
-      {({ submitForm, isSubmitting }: FormikProps<Values>) => (
+      {({ submitForm, isSubmitting, status }: FormikProps<Values>) => (
         <View style={styles.form}>
           <FormikTextInput
             style={styles.textInput}
@@ -80,6 +81,9 @@ function SignIn() {
           >
             <Text style={styles.submitText}>Sign In</Text>
           </Pressable>
+          {status?.errorMessage && (
+            <FormikError errorMessage={status.errorMessage} />
+          )}
         </View>
       )}
     </Formik>

@@ -18,9 +18,9 @@ function useSignin() {
   const navigate = useNavigate();
   const [authenticateUser, { client }] = useMutation(AUTHENTICATE);
 
-  async function submitCredentials(
-    values: Values,
-    { setErrors }: FormikHelpers<Values>
+  async function submitCredentials<T extends Values>(
+    values: T,
+    { setStatus }: FormikHelpers<T>
   ) {
     const { username, password } = values;
 
@@ -33,7 +33,7 @@ function useSignin() {
       navigate("/", { replace: true });
     } catch (error: unknown) {
       if (error instanceof Error) {
-        setErrors({ username: "", password: error.message });
+        setStatus({ errorMessage: error.message });
       }
     }
   }

@@ -1,6 +1,7 @@
 import Constants from "expo-constants";
 import { View, StyleSheet, ScrollView } from "react-native";
 
+import { MeQuery } from "../__generated__/graphql";
 import theme from "../theme";
 import AppBarButton from "./AppBarButton";
 import SignOutButton from "./SignOutButton";
@@ -14,12 +15,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBar = () => {
+interface AppBarProps {
+  me: MeQuery["me"];
+}
+
+const AppBar = ({ me }: AppBarProps) => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <SignOutButton />
-        <AppBarButton label="Respositories" to="/" />
+        {me ? (
+          <>
+            <AppBarButton label="Respositories" to="/" />
+            <AppBarButton label="Create Review" to="/create-review" />
+            <SignOutButton />
+          </>
+        ) : (
+          <>
+            <AppBarButton label="Sign In" to="/signin" />
+            <AppBarButton label="Sign Up" to="/signup" />
+          </>
+        )}
       </ScrollView>
     </View>
   );

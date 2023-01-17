@@ -9,7 +9,9 @@ import AuthWrapper from "./AuthWrapper";
 import MainLayout from "./MainLayout";
 import RepositoryList from "./RepositoryList";
 import RepositoryView from "./RepositoryView";
+import ReviewForm from "./ReviewForm";
 import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,17 +40,19 @@ const Main = () => {
     <>
       <View style={styles.container}>
         <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route element={<AuthWrapper me={data?.me} />}>
-            <Route element={<MainLayout />}>
+          <Route element={<MainLayout me={data?.me} />}>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route element={<AuthWrapper me={data?.me} />}>
               <Route path="/" element={<RepositoryList />} />
               <Route path="repository">
                 <Route path=":repositoryId" element={<RepositoryView />} />
                 <Route index element={<RepositoryList />} />
               </Route>
+              <Route path="create-review" element={<ReviewForm />} />
             </Route>
+            <Route path="*" element={<Navigate to="/signin" replace />} />
           </Route>
-          <Route path="*" element={<Navigate to="/signin" replace />} />
         </Routes>
       </View>
     </>

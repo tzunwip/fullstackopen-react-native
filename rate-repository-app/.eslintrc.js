@@ -19,5 +19,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ["/**/__generated__/"],
+  ignorePatterns: ["**/__generated__/*"],
 };

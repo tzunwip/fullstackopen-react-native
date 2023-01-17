@@ -1,11 +1,16 @@
 import { Outlet } from "react-router-native";
 
+import { MeQuery } from "../__generated__/graphql";
 import AppBar from "./AppBar";
 
-function MainLayout() {
+interface MainLayoutProps {
+  me: MeQuery["me"];
+}
+
+function MainLayout({ me }: MainLayoutProps) {
   return (
     <>
-      <AppBar />
+      <AppBar me={me} />
       <Outlet />
     </>
   );

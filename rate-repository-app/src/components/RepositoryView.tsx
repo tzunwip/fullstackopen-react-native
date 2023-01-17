@@ -35,6 +35,7 @@ function RepositoryView() {
   const { repositoryId } = useParams();
   const { data, loading, error } = useQuery(GET_REPOSITORY, {
     variables: { id: repositoryId ?? "" },
+    fetchPolicy: "cache-and-network",
   });
 
   if (loading) return <Text>Loading...</Text>;
