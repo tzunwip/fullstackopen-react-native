@@ -33,7 +33,7 @@ function RepositoryView() {
   }
 
   const renderItem = ({ item }: FlatListMethodParams) => (
-    <RepositoryReview item={item.node} />
+    <RepositoryReview item={item.node} mode="user" />
   );
 
   return (

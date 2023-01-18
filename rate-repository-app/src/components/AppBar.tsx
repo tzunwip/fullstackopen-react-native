@@ -26,7 +26,8 @@ const AppBar = ({ me }: AppBarProps) => {
         {me ? (
           <>
             <AppBarButton label="Respositories" to="/" />
-            <AppBarButton label="Create Review" to="/create-review" />
+            <AppBarButton label="My Reviews" to="/user/reviews" />
+            <AppBarButton label="Create Review" to="/user/create-review" />
             <SignOutButton />
           </>
         ) : (

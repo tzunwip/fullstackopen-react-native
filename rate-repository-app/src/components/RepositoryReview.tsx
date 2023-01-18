@@ -50,6 +50,9 @@ const RepositoryReviewFragment = gql(/* GraphQL */ `
     text
     rating
     createdAt
+    repository {
+      fullName
+    }
     user {
       id
       username
@@ -58,14 +61,24 @@ const RepositoryReviewFragment = gql(/* GraphQL */ `
 `);
 
 interface RepositoryReviewProps {
+  mode: "user" | "repository";
   item: FragmentType<typeof RepositoryReviewFragment>;
 }
 
-function RepositoryReview({ item }: RepositoryReviewProps) {
-  const { text, rating, createdAt, user } = useFragment(
+function RepositoryReview({ mode, item }: RepositoryReviewProps) {
+  const { text, rating, createdAt, user, repository } = useFragment(
     RepositoryReviewFragment,
     item
   );
+
+  const content = {
+    user: {
+      name: user.username,
+    },
+    repository: {
+      name: repository.fullName,
+    },
+  }[mode];
 
   return (
     <View style={styles.reviewContainer}>
@@ -79,7 +92,7 @@ function RepositoryReview({ item }: RepositoryReviewProps) {
       </View>
       <View style={styles.textContainer}>
         <PrimaryText style={styles.text}>{text}</PrimaryText>
-        <SecondaryText>{`${user.username} on ${Intl.DateTimeFormat("en-GB", {
+        <SecondaryText>{`${content.name} on ${Intl.DateTimeFormat("en-GB", {
           day: "numeric",
           month: "short",
           year: "numeric",
