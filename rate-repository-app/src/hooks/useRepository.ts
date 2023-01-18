@@ -4,10 +4,10 @@ import { gql } from "../__generated__";
 import { GetRepositoryQueryVariables } from "../__generated__/graphql";
 
 const GET_REPOSITORY = gql(/* GraphQL */ `
-  query GetRepository($id: ID!, $after: String) {
+  query GetRepository($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
       ...RepositoryProfile
-      reviews(after: $after) {
+      reviews(first: $first, after: $after) {
         edges {
           node {
             id

@@ -1,8 +1,7 @@
-import { useQuery } from "@apollo/client";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 import { useParams } from "react-router-native";
 
-import { gql } from "../__generated__";
+import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
 import RepositoryReview from "./RepositoryReview";
 
@@ -11,31 +10,18 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "lightgrey",
   },
+  container: {
+    flex: 1,
+  },
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const GET_REPOSITORY = gql(/* GraphQL */ `
-  query GetRepository($id: ID!) {
-    repository(id: $id) {
-      ...RepositoryProfile
-      reviews {
-        edges {
-          node {
-            id
-            ...RepositoryReview
-          }
-        }
-      }
-    }
-  }
-`);
-
 function RepositoryView() {
   const { repositoryId } = useParams();
-  const { data, loading, error } = useQuery(GET_REPOSITORY, {
-    variables: { id: repositoryId ?? "" },
-    fetchPolicy: "cache-and-network",
+  const { data, loading, error, fetchMore } = useRepository({
+    id: repositoryId ?? "",
+    first: 2,
   });
 
   if (loading) return <Text>Loading...</Text>;
@@ -51,13 +37,15 @@ function RepositoryView() {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       <RepositoryItem item={data.repository} showGithubLink />
       <FlatList
         data={data.repository.reviews.edges}
         renderItem={renderItem}
         keyExtractor={(item) => item.node.id}
         ItemSeparatorComponent={ItemSeparator}
+        onEndReached={fetchMore}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );

@@ -44,8 +44,8 @@ function useRepositories(variables: GetRepositoriesQueryVariables) {
     if (canFetchMore) {
       fetchMore({
         variables: {
-          after: data.repositories.pageInfo.endCursor,
           ...variables,
+          after: data.repositories.pageInfo.endCursor,
         },
       });
     }
