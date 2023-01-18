@@ -1,7 +1,7 @@
 import { Text, FlatList, View, StyleSheet } from "react-native";
 
 import useMyReviews from "../hooks/useMyReviews";
-import RepositoryReview from "./RepositoryReview";
+import Review from "./Review";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 });
 
 function MyReviews() {
-  const { data, loading, fetchMore, error } = useMyReviews({ first: 2 });
+  const { data, loading, fetchMore, error } = useMyReviews({ first: 5 });
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>There seems to be an error: {error.message}</Text>;
@@ -21,7 +21,7 @@ function MyReviews() {
     item,
   }: {
     item: (typeof data.me.reviews.edges)[number];
-  }) => <RepositoryReview item={item.node} mode="repository" />;
+  }) => <Review item={item.node} mode="repository" />;
 
   return (
     <View style={styles.container}>

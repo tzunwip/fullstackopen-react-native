@@ -38,6 +38,7 @@ function useMyReviews(variables: MyReviewsQueryVariables) {
         },
       });
     }
+    console.log("fetching");
   }
 
   return {

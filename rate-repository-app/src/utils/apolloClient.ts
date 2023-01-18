@@ -49,7 +49,7 @@ const createApolloClient = () => {
             reviews: relayStylePagination(),
           },
         },
-        Me: {
+        User: {
           fields: {
             reviews: relayStylePagination(),
           },

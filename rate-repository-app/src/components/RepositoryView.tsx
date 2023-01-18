@@ -3,7 +3,7 @@ import { useParams } from "react-router-native";
 
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
-import RepositoryReview from "./RepositoryReview";
+import Review from "./Review";
 
 const styles = StyleSheet.create({
   separator: {
@@ -33,7 +33,7 @@ function RepositoryView() {
   }
 
   const renderItem = ({ item }: FlatListMethodParams) => (
-    <RepositoryReview item={item.node} mode="user" />
+    <Review item={item.node} mode="user" />
   );
 
   return (
