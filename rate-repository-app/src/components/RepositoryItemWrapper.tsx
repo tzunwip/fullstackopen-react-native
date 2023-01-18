@@ -1,15 +1,12 @@
 import { Pressable } from "react-native";
 import { useNavigate } from "react-router-native";
 
-interface RepositoryListItemWrapperProps {
+interface RepositoryItemWrapperProps {
   id: string;
   children: React.ReactNode;
 }
 
-function RepositoryListItemWrapper({
-  id,
-  children,
-}: RepositoryListItemWrapperProps) {
+function RepositoryItemWrapper({ id, children }: RepositoryItemWrapperProps) {
   const navigate = useNavigate();
 
   return (
@@ -22,4 +19,4 @@ function RepositoryListItemWrapper({
   );
 }
 
-export default RepositoryListItemWrapper;
+export default RepositoryItemWrapper;

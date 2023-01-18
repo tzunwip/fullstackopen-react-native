@@ -4,7 +4,7 @@ import { GetRepositoriesQueryVariables } from "../__generated__/graphql";
 import useRepositories from "../hooks/useRepositories";
 import theme from "../theme";
 import RepositoryItem from "./RepositoryItem";
-import RepositoryListItemWrapper from "./RepositoryListItemWrapper";
+import RepositoryItemWrapper from "./RepositoryItemWrapper";
 import { PrimaryText } from "./Text";
 
 const styles = StyleSheet.create({
@@ -43,9 +43,9 @@ function RepositoryList({ variables }: RepositoryListProps) {
   }: {
     item: (typeof data.repositories.edges)[number];
   }) => (
-    <RepositoryListItemWrapper id={item.node.id}>
+    <RepositoryItemWrapper id={item.node.id}>
       <RepositoryItem item={item.node} />
-    </RepositoryListItemWrapper>
+    </RepositoryItemWrapper>
   );
 
   return (
