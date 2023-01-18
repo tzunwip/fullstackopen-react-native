@@ -7,7 +7,7 @@ import { gql } from "../__generated__/";
 import theme from "../theme";
 import AuthWrapper from "./AuthWrapper";
 import MainLayout from "./MainLayout";
-import RepositoryList from "./RepositoryList";
+import RepositoryListView from "./RepositoryListView";
 import RepositoryView from "./RepositoryView";
 import ReviewForm from "./ReviewForm";
 import SignIn from "./SignIn";
@@ -44,10 +44,10 @@ const Main = () => {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route element={<AuthWrapper me={data?.me} />}>
-              <Route path="/" element={<RepositoryList />} />
+              <Route path="/" element={<RepositoryListView />} />
               <Route path="repository">
                 <Route path=":repositoryId" element={<RepositoryView />} />
-                <Route index element={<RepositoryList />} />
+                <Route index element={<RepositoryListView />} />
               </Route>
               <Route path="create-review" element={<ReviewForm />} />
             </Route>
