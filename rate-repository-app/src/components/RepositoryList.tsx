@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-interface ListProps {
+interface RepositoryListProps {
   variables: GetRepositoriesQueryVariables;
 }
 
-function RepositoryList({ variables }: ListProps) {
-  const { data, loading } = useRepositories(variables);
+function RepositoryList({ variables }: RepositoryListProps) {
+  const { data, loading, fetchMore } = useRepositories(variables);
 
   if (loading) return <PrimaryText>Loading...</PrimaryText>;
   if (!data || data?.repositories.edges.length === 0)
@@ -41,7 +41,7 @@ function RepositoryList({ variables }: ListProps) {
   const renderItem = ({
     item,
   }: {
-    item: typeof data.repositories.edges[number];
+    item: (typeof data.repositories.edges)[number];
   }) => (
     <RepositoryListItemWrapper id={item.node.id}>
       <RepositoryItem item={item.node} />
@@ -53,6 +53,8 @@ function RepositoryList({ variables }: ListProps) {
       data={data.repositories.edges}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
+      onEndReached={fetchMore}
+      onEndReachedThreshold={0.5}
     />
   );
 }

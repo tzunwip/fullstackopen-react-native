@@ -43,7 +43,7 @@ function RepositoryView() {
   if (!data?.repository) return <Text>Repository could not be found!</Text>;
 
   interface FlatListMethodParams {
-    item: typeof data.repository.reviews.edges[number];
+    item: (typeof data.repository.reviews.edges)[number];
   }
 
   const renderItem = ({ item }: FlatListMethodParams) => (

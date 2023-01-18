@@ -6,6 +6,7 @@ import {
   concat,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { relayStylePagination } from "@apollo/client/utilities";
 import { LOCAL_IP } from "@env";
 
 import { getStore } from "./asyncStore";
@@ -36,7 +37,15 @@ const httpLink = new HttpLink({
 const createApolloClient = () => {
   return new ApolloClient({
     link: concat(authMiddleware, httpLink),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            repositories: relayStylePagination(),
+          },
+        },
+      },
+    }),
   });
 };
 
